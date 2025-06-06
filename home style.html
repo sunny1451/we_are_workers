@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Worker Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      height: 100vh;
+      background: url('http://wallpapercave.com/wp/GQn5K5c.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Great Vibes', cursive;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Moon animation with glow trail */
+    .moon {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: url("https://i.pinimg.com/originals/a1/01/e2/a101e22fc458c1110d418ee309f240c8.png") no-repeat center center;
+      background-size: cover;
+      border-radius: 50%;
+      box-shadow: 0 0 30px #ffcc00, 0 0 60px #ffcc00;
+      animation: moonFly 15s ease-in-out infinite, moonGlow 5s infinite alternate;
+      z-index: 1;
+    }
+
+    @keyframes moonFly {
+      0% {
+        top: 50%;
+        left: 50%;
+        opacity: 0;
+      }
+      50% {
+        top: 20%;
+        left: 80%;
+        opacity: 1;
+      }
+      100% {
+        top: 50%;
+        left: 10%;
+        opacity: 0.8;
+      }
+    }
+
+    @keyframes moonGlow {
+      0% {
+        box-shadow: 0 0 40px #a0faff, 0 0 80px #a0faff;
+      }
+      50% {
+        box-shadow: 0 0 80px #ffcc00, 0 0 120px #ffcc00;
+      }
+      100% {
+        box-shadow: 0 0 40px #a0faff, 0 0 80px #a0faff;
+      }
+    }
+
+    /* Glowing effect for text */
+    .animated-text {
+      font-size: 7rem;
+      font-weight: bold;
+      color: #fff;
+      z-index: 2;
+      letter-spacing: 5px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      animation: textAppear 3s ease-out forwards;
+    }
+
+    .animated-text span {
+      opacity: 0;
+      animation: fadeIn 1s ease-in-out forwards;
+      display: inline-block;
+      transform: translateY(100px);
+    }
+
+    .animated-text span:hover {
+      color: #ffcc00;
+      text-shadow: 0 0 30px #ffcc00, 0 0 60px #ffcc00;
+      transform: translateY(-10px);
+    }
+
+    .animated-text span:nth-child(1) { animation-delay: 0.4s; }
+    .animated-text span:nth-child(2) { animation-delay: 0.6s; }
+    .animated-text span:nth-child(3) { animation-delay: 0.8s; }
+    .animated-text span:nth-child(4) { animation-delay: 1.0s; }
+    .animated-text span:nth-child(5) { animation-delay: 1.2s; }
+    .animated-text span:nth-child(6) { animation-delay: 1.4s; }
+    .animated-text span:nth-child(7) { animation-delay: 1.6s; }
+    .animated-text span:nth-child(8) { animation-delay: 1.8s; }
+    .animated-text span:nth-child(9) { animation-delay: 2.0s; }
+    .animated-text span:nth-child(10) { animation-delay: 2.2s; }
+    .animated-text span:nth-child(11) { animation-delay: 2.4s; }
+    .animated-text span:nth-child(12) { animation-delay: 2.6s; }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(100px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Text appear animation */
+    @keyframes textAppear {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Typography */
+    @media (max-width: 768px) {
+      .animated-text {
+        font-size: 5rem;
+      }
+      .moon {
+        width: 180px;
+        height: 180px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .animated-text {
+        font-size: 4rem;
+      }
+      .moon {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="shooting-stars"></div>
+
+  <div class="dashboard-container">
+    <div class="moon"></div>
+
+    <h1 class="animated-text">
+      <span>L</span><span>o</span><span>c</span><span>a</span><span>l</span>
+      &nbsp;
+      <span>W</span><span>o</span><span>r</span><span>k</span><span>e</span><span>r</span><span>s</span>
+    </h1>
+  </div>
+
+  <!-- Redirect script -->
+  <script>
+    setTimeout(() => {
+        window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/home/home.html';
+    }, 8000);
+  </script>
+
+</body>
+</html>

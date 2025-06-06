@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Local Workers - Professional Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f5f7fa;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* Header Styles */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.98);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 600;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo::before {
+      content: "🧹";
+      margin-right: 10px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .nav-button {
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 500;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px) rotate(5deg);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: url('https://wallpaperaccess.com/full/5089787.jpg') no-repeat center center/cover;
+      color: white;
+      padding: 0 20px;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 1;
+    }
+
+    .hero h1, .hero p, .hero .cta-button {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .hero h1:hover {
+      transform: scale(1.05) rotate(2deg);
+    }
+
+    .hero p {
+      font-size: 20px;
+      margin-bottom: 30px;
+      max-width: 600px;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+      transition: opacity 0.3s ease;
+    }
+
+    .hero p:hover {
+      opacity: 0.8;
+    }
+
+    .cta-button {
+      padding: 15px 40px;
+      background: linear-gradient(135deg, #f1c40f, #e67e22);
+      color: #2c3e50;
+      border: none;
+      border-radius: 50px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .cta-button:hover {
+      background: linear-gradient(135deg, #d4ac0d, #c0392b);
+      transform: scale(1.05) rotate(3deg);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: 0.5s;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    /* Image Slider Section */
+    .image-slider-section {
+      padding: 80px 40px;
+      background: #f5f7fa;
+      text-align: center;
+    }
+
+    .slider-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+      transition: transform 0.5s ease, opacity 0.5s ease;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.5s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    }
+
+    .slide img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.1);
+    }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: 500;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .slide-caption:hover {
+      opacity: 0.9;
+      transform: translateY(-5px);
+    }
+
+    .slider-nav {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .nav-dot {
+      width: 12px;
+      height: 12px;
+      background: #7f8c8d;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .nav-dot.active {
+      background: #3498db;
+      transform: scale(1.3);
+    }
+
+    .nav-dot:hover {
+      background: #2980b9;
+      transform: scale(1.5);
+    }
+
+    /* Video Slider Section with Sliding Effects */
+    .video-slider-section {
+      padding: 80px 40px;
+      background: #fff;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .video-container {
+      position: relative;
+      max-width: 1200px;
+      margin: 0 auto;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .video-slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .video-slide {
+      min-width: 100%;
+      position: relative;
+      transition: transform 0.5s ease;
+    }
+
+    .video-slide video {
+      width: 100%;
+      height: 450px; /* Increased height for better visibility */
+      object-fit: cover;
+      border-radius: 15px;
+      transition: transform 0.5s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    }
+
+    .video-slide video:hover {
+      transform: scale(1.03);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      filter: brightness(1.1);
+    }
+
+    .video-caption {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      font-size: 20px;
+      font-weight: 500;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .video-caption:hover {
+      opacity: 0.9;
+      transform: translateY(-5px);
+    }
+
+    /* Services Info Section */
+    .services-info-section {
+      padding: 80px 40px;
+      background: #f5f7fa;
+      text-align: center;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 50px;
+      color: #2c3e50;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    h2:hover {
+      color: #3498db;
+      transform: scale(1.05);
+    }
+
+    h2::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: #3498db;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .services-info-section p {
+      max-width: 800px;
+      margin: 20px auto;
+      font-size: 18px;
+      color: #7f8c8d;
+      line-height: 1.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .services-info-section p:hover {
+      opacity: 0.9;
+    }
+
+    .services-info-section ul {
+      max-width: 800px;
+      margin: 20px auto;
+      text-align: left;
+      font-size: 18px;
+      color: #7f8c8d;
+      line-height: 1.6;
+    }
+
+    .services-info-section li {
+      margin-bottom: 10px;
+      transition: transform 0.3s ease;
+    }
+
+    .services-info-section li:hover {
+      transform: translateX(10px);
+    }
+
+    /* App Usage Section */
+    .app-usage-section {
+      padding: 80px 40px;
+      background: #fff;
+      text-align: center;
+    }
+
+    .app-usage-section p {
+      max-width: 800px;
+      margin: 20px auto;
+      font-size: 18px;
+      color: #7f8c8d;
+      line-height: 1.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .app-usage-section p:hover {
+      opacity: 0.9;
+    }
+
+    /* About Section */
+    .about-section {
+      padding: 80px 40px;
+      background: #f5f7fa;
+      text-align: center;
+    }
+
+    .about-section p {
+      max-width: 800px;
+      margin: 20px auto;
+      font-size: 18px;
+      color: #7f8c8d;
+      line-height: 1.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .about-section p:hover {
+      opacity: 0.9;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 30px;
+      background: #2c3e50;
+      color: white;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+
+    .footer:hover {
+      background: #34495e;
+    }
+
+    /* Scroll Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 600px) {
+      .logo {
+        font-size: 24px;
+      }
+
+      .nav-buttons {
+        justify-content: center;
+        margin-top: 10px;
+        gap: 10px;
+      }
+
+      .slide img, .video-slide video {
+        height: 300px;
+      }
+
+      .cta-button {
+        padding: 12px 30px;
+        font-size: 16px;
+      }
+
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .slide-caption, .video-caption {
+        font-size: 16px;
+        padding: 10px 15px;
+        bottom: 20px;
+        left: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav class="nav">
+      <div class="logo">LOCAL WORKERS</div>
+      <div class="nav-buttons">
+        <button class="nav-button" onclick="goToPagehome()">Home</button>
+        <button class="nav-button" onclick="goToPageabout()">About</button>
+        <button class="nav-button" onclick="goToPagecontact()">Tracker</button>
+        <button class="nav-button" onclick="goToPagelogin()">Logout</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <h1>Explore Our Professional Services</h1>
+    <p>Discover a wide range of trusted solutions for your home and office needs – from cleaning to repairs, we’ve got you covered.</p>
+    <button class="cta-button" id="bookYourServices">Book Your Services</button>
+  </section>
+
+  <!-- Image Slider Section -->
+  <section class="image-slider-section fade-in">
+    <h2>Our Work in Action</h2>
+    <div class="slider-container">
+      <div class="slider" id="slider">
+        <div class="slide">
+          <img src="https://vintage-room.com/wp-content/uploads/2022/07/AdobeStock_317669919.jpeg" alt="Construction Site">
+          <div class="slide-caption">Expert Construction Services</div>
+        </div>
+        <div class="slide">
+          <img src="https://www.betterup.com/hubfs/Happy-work-team-cheering-and-celebrating-at-meeting-team-collaboration.jpg" alt="Team Collaboration">
+          <div class="slide-caption">Team Collaboration at Its Best</div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Modern Home">
+          <div class="slide-caption">Crafting Modern Homes</div>
+        </div>
+        <div class="slide">
+          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Luxury Interior">
+          <div class="slide-caption">Elegant Interior Design</div>
+       
+        </div>
+      </div>
+    </div>
+    <div class="slider-nav" id="sliderNav"></div>
+  </section>
+
+  <!-- Video Slider Section -->
+  <section class="video-slider-section fade-in">
+    <h2>Experience Our Expertise</h2>
+    <div class="video-container" id="videoContainer">
+      <div class="video-slider" id="videoSlider">
+        <div class="video-slide">
+          <video muted loop>
+            <source src="c:\Users\sunny\Downloads\7581240-hd_1920_1080_30fps (1).mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-caption">Celebrating Success with Our Team</div>
+        </div>
+        <div class="video-slide">
+          <video muted loop>
+            <source src="c:\Users\sunny\Downloads\3255275-uhd_3840_2160_25fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-caption">Planning for Excellence</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Info Section -->
+  <section class="services-info-section fade-in">
+    <h2>Our Services Overview</h2>
+    <p>At Local Workers, we offer a comprehensive range of professional services to meet all your home and office needs. Our verified experts ensure quality and reliability in every task.</p>
+    <ul>
+      <li><strong>Cleaning Services:</strong> From deep cleaning to regular maintenance, we keep your spaces spotless.</li>
+      <li><strong>Plumbing Solutions:</strong> Fixing leaks, unclogging drains, and installing fixtures with precision.</li>
+      <li><strong>Electrical Repairs:</strong> Ensuring safety with expert electrical installations and repairs.</li>
+      <li><strong>Construction & Renovation:</strong> Building and renovating spaces with top-notch craftsmanship.</li>
+      <li><strong>Interior Design:</strong> Transforming your spaces with modern and luxurious designs.</li>
+    </ul>
+    <p>Visit our services page to explore these offerings in detail and book the perfect solution for your needs.</p>
+  </section>
+
+  <!-- App Usage Section -->
+  <section class="app-usage-section fade-in">
+    <h2>How to Use Our App</h2>
+    <p>Our app makes it easy to book and manage services on the go. Download the Local Workers app from the App Store or Google Play, sign up, and follow these steps:</p>
+    <ul>
+      <li><strong>Browse Services:</strong> Explore a wide range of services from cleaning to construction.</li>
+      <li><strong>Book Instantly:</strong> Select your service, choose a time, and book with a few taps.</li>
+      <li><strong>Track Progress:</strong> Use the Tracker feature to monitor the status of your booked services.</li>
+      <li><strong>Manage Bookings:</strong> View, reschedule, or cancel bookings directly from the app.</li>
+      <li><strong>Secure Payments:</strong> Pay securely through the app with multiple payment options.</li>
+    </ul>
+    <p>With Local Workers, maintaining your home or office has never been easier!</p>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section fade-in">
+    <h2>About Local Workers</h2>
+    <p>We connect you with verified professionals for a variety of services, including cleaning, plumbing, electrical work, construction, and more. Our platform ensures reliability, affordability, and top-notch quality, making your home or office maintenance effortless.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    © 2025 Local Workers. All rights reserved.
+  </footer>
+
+  <script>
+    function goToPagehome() {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/home/home.html';
+    }
+
+    function goToPageabout() {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/about/about.html';
+    }
+
+    function goToPagecontact() {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/tracking/contact.html';
+    }
+
+    function goToPagelogin() {
+      window.location.href = 'login.html';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Add event listener to "Book Your Services" button
+      const bookYourServicesButton = document.getElementById('bookYourServices');
+      if (bookYourServicesButton) {
+        bookYourServicesButton.addEventListener('click', () => {
+          window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/search%20bar/script.html';
+        });
+      }
+
+      // Image Slider Functionality
+      const slider = document.getElementById('slider');
+      const sliderNav = document.getElementById('sliderNav');
+      const slides = document.querySelectorAll('.slide');
+      let currentSlide = 0;
+
+      // Create navigation dots
+      slides.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('nav-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        sliderNav.appendChild(dot);
+      });
+
+      function goToSlide(index) {
+        currentSlide = index;
+        slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        document.querySelectorAll('.nav-dot').forEach((dot, i) => {
+          dot.classList.toggle('active', i === currentSlide);
+        });
+      }
+
+      function autoSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        goToSlide(currentSlide);
+      }
+
+      setInterval(autoSlide, 5000);
+
+      // Mouse Events for Image Slider
+      slides.forEach(slide => {
+        slide.addEventListener('mousemove', (e) => {
+          const rect = slide.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const centerX = rect.width / 2;
+          const tilt = (x - centerX) / centerX * 5;
+          slide.style.transform = `translateX(-${currentSlide * 100}%) translateX(${tilt}px)`;
+        });
+
+        slide.addEventListener('mouseleave', () => {
+          slide.style.transform = `translateX(-${currentSlide * 100}%)`;
+        });
+      });
+
+      // Video Slider Functionality with Debounced Play/Pause
+      const videoSlider = document.getElementById('videoSlider');
+      const videoSlides = document.querySelectorAll('.video-slide');
+      const videoContainer = document.getElementById('videoContainer');
+
+      // Debounce function to prevent rapid play/pause conflicts
+      function debounce(func, wait) {
+        let timeout;
+        return function (...args) {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+      }
+
+      videoSlides.forEach((slide, index) => {
+        const video = slide.querySelector('video');
+        const playVideo = debounce(() => {
+          video.play().catch(error => {
+            console.log('Video play failed:', error);
+          });
+        }, 100);
+
+        const pauseVideo = debounce(() => {
+          video.pause();
+        }, 100);
+
+        slide.addEventListener('mouseenter', playVideo);
+        slide.addEventListener('mouseleave', pauseVideo);
+      });
+
+      // Mouse Events for Video Slider
+      videoContainer.addEventListener('mousemove', (e) => {
+        const rect = videoContainer.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const width = rect.width;
+        const slideWidth = width / videoSlides.length;
+        const translateX = (x / width - 0.5) * slideWidth;
+        videoSlider.style.transform = `translateX(${translateX}px)`;
+      });
+
+      videoContainer.addEventListener('mouseleave', () => {
+        videoSlider.style.transform = `translateX(0px)`;
+      });
+
+      // Scroll Animation
+      const fadeInElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      fadeInElements.forEach(element => observer.observe(element));
+    });
+  </script>
+</body>
+</html>
