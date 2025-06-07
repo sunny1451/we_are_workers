@@ -1,69 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About Us - Local Workers App</title>
+  <title>About Us - Local Workers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #1f4037, #99f2c8);
-      color: white;
+    }
+
+    body {
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
       overflow-x: hidden;
-      animation: gradientShift 12s ease infinite;
-      line-height: 1.8;
-      scroll-behavior: smooth;
     }
 
-    @keyframes gradientShift {
-      0% { background: linear-gradient(135deg, #1f4037, #99f2c8); }
-      50% { background: linear-gradient(135deg, #360033, #0b8793); }
-      100% { background: linear-gradient(135deg, #1f4037, #99f2c8); }
+    /* Header Styles */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.98);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
     }
 
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 600;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo::before {
+      content: "🧹";
+      margin-right: 10px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .nav-button {
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 500;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px) rotate(5deg);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Container and Sections */
     .container {
       max-width: 1200px;
-      margin: auto;
-      padding: 40px 20px;
-    }
-
-    .header {
-      background: rgba(0, 0, 0, 0.85);
-      text-align: center;
-      padding: 30px 20px;
-      border-bottom: 4px solid #FFD700;
-      box-shadow: 0 4px 25px rgba(0, 0, 0, 0.6);
-      font-size: 3.5rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      animation: fadeIn 2s ease;
+      margin: 40px auto;
+      padding: 20px;
     }
 
     section {
-      margin: 50px 0;
-      padding: 50px;
-      border-radius: 25px;
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8);
-      background: rgba(0, 0, 0, 0.7);
-      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      margin-bottom: 30px;
+      transition: all 0.3s ease;
     }
 
     section:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     h1, h2 {
-      color: #FFD700;
       text-align: center;
-      text-shadow: 4px 4px 12px rgba(0, 0, 0, 0.9);
+      color: #2c3e50;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    h1:hover, h2:hover {
+      color: #3498db;
+      transform: scale(1.05);
+    }
+
+    h1::after, h2::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: #3498db;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     p, li {
-      font-size: 1.3rem;
-      line-height: 2;
+      font-size: 16px;
+      color: #7f8c8d;
+      margin: 10px 0;
     }
 
     ul {
@@ -72,95 +139,280 @@
     }
 
     li {
-      margin: 20px 0;
-    }
-
-    a {
-      color: #FFD700;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      color: #FF6347;
-    }
-
-    .footer {
-      text-align: center;
-      padding: 30px 0;
-      background: rgba(0, 0, 0, 0.85);
-      box-shadow: 0 -6px 30px rgba(0, 0, 0, 0.8);
-    }
-
-    .highlight {
-      color: #FF6347;
-      font-weight: bold;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      margin: 15px 0;
+      display: flex;
+      align-items: flex-start;
     }
 
     .icon {
       margin-right: 10px;
+      color: #3498db;
+      font-size: 20px;
+    }
+
+    .highlight {
+      color: #3498db;
+      font-weight: 600;
+    }
+
+    .qa {
+      margin: 20px 0;
+    }
+
+    .qa-question {
+      font-weight: 600;
+      color: #2c3e50;
+      font-size: 18px;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+    }
+
+    .qa-answer {
+      color: #7f8c8d;
+      padding-left: 30px;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 30px;
+      background: #2c3e50;
+      color: white;
+      font-size: 14px;
+      transition: background 0.3s ease;
+    }
+
+    .footer:hover {
+      background: #34495e;
+    }
+
+    /* Scroll Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        margin: 20px 16px;
+      }
+
+      .nav-buttons {
+        justify-content: center;
+        margin-top: 10px;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
+
+      section {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <nav class="nav">
+      <div class="logo">LOCAL WORKERS</div>
+      <div class="nav-buttons">
+        <button class="nav-button" onclick="goToPagehome()">Home</button>
+        <button class="nav-button" onclick="goToPageabout()">About</button>
+        <button class="nav-button" onclick="goToPagecontact()">Tracker</button>
+        <button class="nav-button" onclick="goToPagelogin()">Logout</button>
+      </div>
+    </nav>
+  </header>
 
-  <header class="header">Local Workers Website</header>
-
+  <!-- Main Content -->
   <div class="container">
-
-    <section>
-      <h1>About Local Workers Website</h1>
-      <p>
-        Local Workers is a digital platform built to make your everyday life easier by instantly connecting you with trusted and skilled professionals near you. Whether you need an electrician, plumber, carpenter, cleaner, technician, or a home repair expert, our system ensures you're never more than a few clicks away from reliable help.
-      </p>
-      <p>
-        With advanced technology, a user-friendly interface, and real-time service matching, we bring convenience, quality, and safety to your doorstep. We verify every professional on our platform through government-approved IDs and customer ratings, ensuring you get only the best.
-      </p>
-      <p>
-        Local Workers brings a modern solution to traditional service problems — all while keeping transparency, affordability, and customer satisfaction at the core.
-      </p>
+    <section class="fade-in">
+      <h1>About Local Workers</h1>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">❓</span> What is Local Workers?</p>
+        <p class="qa-answer">
+          Local Workers is a digital platform designed to simplify your daily life by connecting you with trusted and skilled professionals in your area. Whether you need an electrician, plumber, carpenter, cleaner, technician, or a home repair expert, our system ensures you're never more than a few clicks away from reliable help. We use advanced technology, a user-friendly interface, and real-time service matching to bring convenience, quality, and safety to your doorstep.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">✅</span> How do we ensure quality?</p>
+        <p class="qa-answer">
+          Every professional on our platform is verified through government-approved IDs and background checks. We also rely on customer ratings and reviews to maintain high standards. Our goal is to ensure that you always receive the best service possible.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">💡</span> What sets us apart?</p>
+        <p class="qa-answer">
+          Local Workers brings a modern solution to traditional service problems by focusing on transparency, affordability, and customer satisfaction. From real-time tracking to secure payments, we prioritize your convenience and trust.
+        </p>
+      </div>
     </section>
 
-    <section>
+    <section class="fade-in">
       <h2>Our Features</h2>
       <ul>
-        <li><span class="highlight">Real-Time Request Matching:</span> Your service requests are instantly matched with available, skilled workers in your area.</li>
-        <li><span class="highlight">Verified Professionals:</span> Every professional undergoes a rigorous verification process before joining the platform.</li>
-        <li><span class="highlight">Live Tracking:</span> Track the worker’s status and estimated time of arrival in real-time.</li>
-        <li><span class="highlight">Secure Payments:</span> Pay directly through UPI, credit/debit card, or wallet with full encryption and transparency.</li>
-        <li><span class="highlight">24/7 Availability:</span> Services available anytime — whether it's early morning or midnight emergencies.</li>
-        <li><span class="highlight">Chat Support:</span> Directly message workers or support for any clarification or updates on your request.</li>
-        <li><span class="highlight">Customer Reviews:</span> See reviews and ratings from other users to make informed choices.</li>
+        <li><span class="icon">⚡</span> <span class="highlight">Real-Time Request Matching:</span> Your service requests are instantly matched with available, skilled workers in your area, ensuring quick responses.</li>
+        <li><span class="icon">✔️</span> <span class="highlight">Verified Professionals:</span> Every worker undergoes a rigorous verification process, including ID checks and background screening.</li>
+        <li><span class="icon">📍</span> <span class="highlight">Live Tracking:</span> Track your assigned worker’s status and estimated time of arrival in real-time, keeping you informed every step of the way.</li>
+        <li><span class="icon">💳</span> <span class="highlight">Secure Payments:</span> Pay directly through UPI, credit/debit card, or digital wallets with full encryption and transparency.</li>
+        <li><span class="icon">⏰</span> <span class="highlight">24/7 Availability:</span> Our services are available anytime, whether it's early morning or a midnight emergency.</li>
+        <li><span class="icon">💬</span> <span class="highlight">Chat Support:</span> Directly message workers or our support team for clarifications or updates on your request.</li>
+        <li><span class="icon">⭐</span> <span class="highlight">Customer Reviews:</span> See reviews and ratings from other users to make informed choices about the workers you hire.</li>
+        <li><span class="icon">🔔</span> <span class="highlight">Instant Notifications:</span> Receive real-time updates about your request status, worker assignments, and more.</li>
+        <li><span class="icon">🌐</span> <span class="highlight">Multi-Language Support:</span> Access our platform in your preferred language for a seamless experience.</li>
       </ul>
     </section>
 
-    <section>
+    <section class="fade-in">
+      <h2>Importance of Workers in Daily Life</h2>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🛠️</span> Why are workers essential?</p>
+        <p class="qa-answer">
+          Workers like plumbers, electricians, cleaners, and carpenters are the backbone of our daily lives. They ensure our homes function smoothly by fixing leaks, repairing electrical faults, maintaining cleanliness, and building or repairing essential structures. Without their expertise, small issues could escalate into major inconveniences, disrupting our routines and safety.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🏡</span> How do they impact our lives?</p>
+        <p class="qa-answer">
+          Imagine a day without a plumber to fix a burst pipe, an electrician to restore power during an outage, or a cleaner to maintain hygiene in your space. These workers save time, reduce stress, and ensure our living environments are safe and comfortable. They also contribute to the economy by providing essential services and creating job opportunities.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🤝</span> Why support local workers?</p>
+        <p class="qa-answer">
+          Supporting local workers not only ensures quick access to services but also empowers communities. By hiring local professionals, you help sustain livelihoods, foster trust, and build stronger neighborhood connections. Local Workers is committed to uplifting these workers by providing them with digital access to opportunities.
+        </p>
+      </div>
+    </section>
+
+    <section class="fade-in">
+      <h2>Explore Our Website</h2>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🏠</span> What can I do on the Home Page?</p>
+        <p class="qa-answer">
+          The Home Page (`home.html`) is your starting point. It provides an overview of Local Workers, featuring a search bar to quickly request services (e.g., plumber, electrician). You can also explore featured workers, read testimonials, and learn about our services through an interactive interface.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">ℹ️</span> What’s on the About Page?</p>
+        <p class="qa-answer">
+          You’re here! The About Page (`about.html`) provides detailed information about Local Workers, our mission, vision, and features. It also explains the importance of workers in daily life and gives you a tour of our website’s functionality.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">📍</span> What does the Tracker Page do?</p>
+        <p class="qa-answer">
+          The Tracker Page (`contact.html`) allows you to track your assigned worker in real-time. Enter your tracking code or request ID to see the worker’s details, status, and estimated arrival time. It also provides quick links to customer support, partnership opportunities, and feedback submission.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">📞</span> How does the Customer Support Page work?</p>
+        <p class="qa-answer">
+          The Customer Support Page (`support.html`) offers a live chat feature powered by an AI assistant. After entering your name and phone number, you can chat with the AI to resolve queries, report issues, or get updates. You can also upload images (e.g., to show a problem), and all chats are saved in our system for future reference.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">⭐</span> What’s the Feedback Page for?</p>
+        <p class="qa-answer">
+          The Feedback Page (`feedback.html`) lets you share your experience with Local Workers. After entering your name, you can rate your experience (1 to 5 stars) and write a review. All reviews are displayed publicly, allowing other users to read them and reply, creating a community-driven review system.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🤝</span> What’s on the Partner With Us Page?</p>
+        <p class="qa-answer">
+          The Partner With Us Page (`partner.html`) is for professionals who want to join Local Workers. It provides a form to submit your details, skills, and qualifications. Once verified, you can start receiving service requests and grow your business through our platform.
+        </p>
+      </div>
+    </section>
+
+    <section class="fade-in">
       <h2>Our Mission</h2>
-      <p>
-        We aim to simplify daily life for millions by connecting customers with reliable service providers through an efficient, trustworthy, and technology-driven platform.
-      </p>
-      <p>
-        By empowering local workers with digital access and giving users transparent choices, Local Workers bridges the gap between need and solution — instantly.
-      </p>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🎯</span> What is our goal?</p>
+        <p class="qa-answer">
+          Our mission is to simplify daily life for millions by connecting customers with reliable service providers through an efficient, trustworthy, and technology-driven platform. We aim to make essential services accessible to everyone, anytime, anywhere, while ensuring quality and transparency.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🌍</span> How do we achieve it?</p>
+        <p class="qa-answer">
+          By leveraging technology, we bridge the gap between customers and workers. We empower local professionals with digital tools to reach more clients, while giving users the ability to find trusted help instantly. We also prioritize safety, affordability, and customer satisfaction in every interaction.
+        </p>
+      </div>
     </section>
 
-    <section>
+    <section class="fade-in">
       <h2>Our Vision</h2>
-      <p>
-        To become India’s most trusted local services platform — delivering help at your fingertips with quality, accountability, and care.
-      </p>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🔮</span> Where are we headed?</p>
+        <p class="qa-answer">
+          Our vision is to become India’s most trusted local services platform, delivering help at your fingertips with quality, accountability, and care. We aspire to expand our services across the country, support more local workers, and integrate advanced technologies like AI to enhance user experiences.
+        </p>
+      </div>
+      <div class="qa">
+        <p class="qa-question"><span class="icon">🚀</span> What’s next for Local Workers?</p>
+        <p class="qa-answer">
+          We plan to introduce features like video consultations with workers, AI-based service recommendations, and community-driven initiatives to support local workers. Our goal is to create a holistic ecosystem where users and workers thrive together.
+        </p>
+      </div>
     </section>
-
   </div>
 
+  <!-- Footer -->
   <footer class="footer">
-    <p>&copy; 2025 Local Workers Website. All Rights Reserved.</p>
+    © 2025 Local Workers. All rights reserved.
   </footer>
 
+  <!-- Navigation Script -->
+  <script>
+    // Navigation Functions - Globally accessible
+    window.goToPagehome = function () {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/home/home.html';
+    };
+
+    window.goToPageabout = function () {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/about/about.html';
+    };
+
+    window.goToPagecontact = function () {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/tracking/contact.html';
+    };
+
+    window.goToPagelogin = function () {
+      window.location.href = 'login.html';
+    };
+
+    // Scroll Animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const fadeInElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      fadeInElements.forEach(element => observer.observe(element));
+    });
+  </script>
 </body>
 </html>
