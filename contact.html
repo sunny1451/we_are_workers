@@ -1,33 +1,89 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contact Us - IntiSeva</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Local Workers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', sans-serif;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
       background: #f5f7fa;
       color: #333;
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .header {
-      background-color: #0056b3;
-      color: white;
-      padding: 20px 30px;
-      text-align: center;
+    /* Header Styles */
+    header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 60px;
+      background: rgba(255, 255, 255, 0.98);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
       font-size: 28px;
       font-weight: 600;
-      letter-spacing: 1px;
+      color: #2c3e50;
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
     }
 
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .logo::before {
+      content: "🧹";
+      margin-right: 10px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .nav-button {
+      padding: 10px 25px;
+      border: none;
+      border-radius: 25px;
+      font-weight: 500;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .nav-button:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px) rotate(5deg);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Tracking Section */
     .tracking-section {
       max-width: 550px;
       margin: 40px auto 20px;
@@ -41,7 +97,25 @@
     .tracking-section h2 {
       text-align: center;
       margin-bottom: 20px;
-      color: #0056b3;
+      color: #3498db;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .tracking-section h2:hover {
+      color: #2980b9;
+      transform: scale(1.05);
+    }
+
+    .tracking-section h2::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: #3498db;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .tracking-section input {
@@ -51,22 +125,30 @@
       border: 1px solid #ccc;
       border-radius: 8px;
       font-size: 16px;
+      transition: border-color 0.3s ease;
+    }
+
+    .tracking-section input:focus {
+      border-color: #3498db;
+      outline: none;
     }
 
     .tracking-section button {
       width: 100%;
       padding: 12px;
-      background: #007bff;
+      background: #3498db;
       border: none;
       color: white;
       font-size: 16px;
       border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s ease;
+      transition: all 0.3s ease;
     }
 
     .tracking-section button:hover {
-      background: #0056b3;
+      background: #2980b9;
+      transform: scale(1.03);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
     .worker-info {
@@ -74,17 +156,18 @@
       margin-top: 20px;
       padding: 20px;
       background: #f0f9ff;
-      border-left: 5px solid #007bff;
+      border-left: 5px solid #3498db;
       border-radius: 10px;
     }
 
     .worker-info h3 {
       margin-bottom: 10px;
-      color: #007bff;
+      color: #3498db;
     }
 
+    /* Contact Section */
     .contact-container {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 60px auto;
       padding: 0 20px;
     }
@@ -92,8 +175,26 @@
     .contact-container h1 {
       text-align: center;
       margin-bottom: 40px;
-      font-size: 32px;
-      color: #222;
+      font-size: 36px;
+      color: #2c3e50;
+      position: relative;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-container h1:hover {
+      color: #3498db;
+      transform: scale(1.05);
+    }
+
+    .contact-container h1::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: #3498db;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
     }
 
     .contact-boxes {
@@ -111,26 +212,59 @@
       max-width: 300px;
       border-radius: 12px;
       box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
-      transition: transform 0.2s ease;
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
 
     .contact-box:hover {
-      transform: translateY(-5px);
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
 
     .contact-box h2 {
-      color: #0056b3;
+      color: #3498db;
       margin-bottom: 10px;
       font-size: 20px;
+      transition: color 0.3s ease;
     }
 
+    .contact-box h2:hover {
+      color: #2980b9;
+    }
+
+    .contact-box p {
+      color: #7f8c8d;
+      transition: opacity 0.3s ease;
+    }
+
+    .contact-box p:hover {
+      opacity: 0.9;
+    }
+
+    /* Footer */
     .footer {
       text-align: center;
-      padding: 20px;
-      background: #0056b3;
+      padding: 30px;
+      background: #2c3e50;
       color: white;
       font-size: 14px;
-      margin-top: 40px;
+      transition: background 0.3s ease;
+    }
+
+    .footer:hover {
+      background: #34495e;
+    }
+
+    /* Scroll Animation */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @media (max-width: 768px) {
@@ -142,17 +276,36 @@
       .tracking-section {
         margin: 20px 16px;
       }
+
+      .nav-buttons {
+        justify-content: center;
+        margin-top: 10px;
+        gap: 10px;
+      }
+
+      .logo {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <header class="header">
-    Local workers
+  <!-- Header -->
+  <header>
+    <nav class="nav">
+      <div class="logo">LOCAL WORKERS</div>
+      <div class="nav-buttons">
+        <button class="nav-button" onclick="goToPagehome()">Home</button>
+        <button class="nav-button" onclick="goToPageabout()">About</button>
+        <button class="nav-button" onclick="goToPagecontact()">Tracker</button>
+        <button class="nav-button" onclick="goToPagelogin()">Logout</button>
+      </div>
+    </nav>
   </header>
 
   <!-- Worker Tracking Section -->
-  <section class="tracking-section">
+  <section class="tracking-section fade-in">
     <h2>🔍 Track Your Assigned Worker</h2>
     <input type="text" id="trackingCode" placeholder="Enter Tracking Code / Request ID" />
     <button onclick="trackWorker()">Track</button>
@@ -160,26 +313,27 @@
   </section>
 
   <!-- Contact Section -->
-  <section class="contact-container">
+  <section class="contact-container fade-in">
     <h1>Get in Touch with Us</h1>
     <div class="contact-boxes">
-      <div class="contact-box">
+      <div class="contact-box" onclick="goToSupport()">
         <h2>📞 Customer Support</h2>
         <p>We’re here to help you 24/7 for any queries.</p>
       </div>
-      <div class="contact-box">
+      <div class="contact-box" onclick="goToPartner()">
         <h2>🤝 Partner With Us</h2>
         <p>Want to become a local worker? Join us today!</p>
       </div>
-      <div class="contact-box">
+      <div class="contact-box" onclick="goToFeedback()">
         <h2>💬 Feedback</h2>
         <p>Your feedback helps us improve our services.</p>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="footer">
-    &copy; 2025 Local workers website. All rights reserved.
+    © 2025 Local Workers. All rights reserved.
   </footer>
 
   <!-- Firebase + Tracker -->
@@ -259,7 +413,50 @@
         display.style.display = "block";
       }
     };
+
+    // Navigation Functions - Attach to window to make globally accessible
+    window.goToPagehome = function () {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/home/home.html';
+    };
+
+    window.goToPageabout = function () {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/about/about.html';
+    };
+
+    window.goToPagecontact = function () {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/tracking/contact.html';
+    };
+
+    window.goToPagelogin = function () {
+      window.location.href = 'login.html';
+    };
+
+    // Contact Box Redirection Functions - Attach to window to make globally accessible
+    window.goToSupport = function () {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/tracking/support/support.html';
+    };
+
+    window.goToPartner = function () {
+      window.location.href = 'partner.html';
+    };
+
+    window.goToFeedback = function () {
+      window.location.href = 'file:///C:/Users/sunny/OneDrive/Desktop/beautiful%20home/order/feedback/feedback.html';
+    };
+
+    // Scroll Animation
+    document.addEventListener('DOMContentLoaded', () => {
+      const fadeInElements = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1 });
+
+      fadeInElements.forEach(element => observer.observe(element));
+    });
   </script>
 </body>
 </html>
-
